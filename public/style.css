@@ -10,7 +10,7 @@ body{
   margin: 10px auto;
   padding: 5px;
   overflow: scroll;
-  width: 300px;
+  width: 450px;
 }
 
 div > div{
@@ -21,11 +21,17 @@ div > div{
 }
 
 div > div > div:first-child{
-  width: 30%;
+  width: 35%;
+}
+
+div > div > div:first-child > p:first-child{
+  margin-right: 5px;
 }
 
 div > div > div:last-child{
-  width: 70%;
+  justify-content: left;
+  margin-left: 5px;
+  width: 65%;
 }
 
 div > div > p{

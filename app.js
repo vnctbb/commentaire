@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 let datas = {};
 
 const urlDb = 'mongodb+srv://admin:admin@diwjs14.hyd9w.mongodb.net/test?authSource=admin&replicaSet=atlas-636i74-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true';
-const nameDb = 'blogito';
+const nameDb = 'commentaire';
 const nameCollectionCom = 'coms';
 const nameCollectionUser = 'user';
 
@@ -38,6 +38,14 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/pages/index.html');
   } else {
     res.sendFile(__dirname + '/pages/connexion.html');
+  }
+})
+
+app.get('/creer', (req, res) => {
+  if(req.session.username){
+    res.sendFile(__dirname + '/pages/index.html');
+  } else {
+    res.sendFile(__dirname + '/pages/creer.html');
   }
 })
 
@@ -74,17 +82,39 @@ app.get('/requete-initial-com', (req, res) => {
 });
 
 app.post('/post-coms', (req, res) => {
+  req.body.username = req.session.username;
   MongoClient.connect(urlDb, {useUnifiedTopology : true}, (err, client) => {
     if (err) throw err;
     const collection = client.db(nameDb).collection(nameCollectionCom);
     collection.insertOne(req.body, (err, res) => {
       if(err) throw err;
-      console.log('1 com inserted');
     });
     collection.find().sort({timestamp : -1}).toArray((err, data) => {
       res.send(data);
     });
   });
+});
+
+app.post('/creation-user', (req, res) => {
+  MongoClient.connect(urlDb, {useUnifiedTopology : true}, (err, client) => {
+    if (err) throw err;
+    const collection = client.db(nameDb).collection(nameCollectionUser);
+    collection.find({username : req.body.username}).toArray((err, data) => {
+      if(data.length){
+        res.redirect('/creer');
+      } else {
+        collection.insertOne(req.body, (err) => {
+          if(err) throw err;
+          req.session.username = req.body.username;
+          res.redirect('/');
+        });
+      }
+    }) 
+  });
+});
+
+app.use( (req, res) => {
+  res.status(404).send('ERREUR 404');
 });
 
 app.listen(PORT, () => {

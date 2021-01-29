@@ -40,10 +40,11 @@ fetch('/requete-initial-com')
     response.forEach(commentaire => {
       const newDiv = document.createElement('div');
       newDiv.innerHTML = `<div>
-        <p>${commentaire.date}</p>
+        <p>${commentaire.date} |</p>
+        <p>${commentaire.username} -></p>
         </div>
         <div>
-        </p>${commentaire.com}<p/>
+        <p>${commentaire.com}</p>
         </div>`;
       div.appendChild(newDiv);
     });
@@ -58,10 +59,11 @@ button.addEventListener('click', () => {
     response.forEach(commentaire => {
       const newDiv = document.createElement('div');
       newDiv.innerHTML = `<div>
-        <p>${commentaire.date}</p>
+        <p>${commentaire.date} |</p>
+        <p>${commentaire.username} -></p>
         </div>
         <div>
-        </p>${commentaire.com}<p/>
+        <p>${commentaire.com}</p>
         </div>`;
       div.appendChild(newDiv);
     });
@@ -85,10 +87,11 @@ formulaire.addEventListener('submit', (evt) => {
     json.forEach(commentaire => {
       const newDiv = document.createElement('div');
       newDiv.innerHTML = `<div>
-        <p>${commentaire.date}</p>
+        <p>${commentaire.date} |</p>
+        <p>${commentaire.username} -></p>
         </div>
         <div>
-        </p>${commentaire.com}<p/>
+        <p>${commentaire.com}</p>
         </div>`;
       div.appendChild(newDiv);
     });
