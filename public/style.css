@@ -1,0 +1,33 @@
+body{
+  font-family: monospace;
+  text-align: center;
+}
+
+.messenger{
+  background-color: rgb(247, 239, 225);
+  border: 1px solid grey;
+  height: 300px;
+  margin: 10px auto;
+  padding: 5px;
+  overflow: scroll;
+  width: 300px;
+}
+
+div > div{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+div > div > div:first-child{
+  width: 30%;
+}
+
+div > div > div:last-child{
+  width: 70%;
+}
+
+div > div > p{
+  font-size: 0.8em;
+}

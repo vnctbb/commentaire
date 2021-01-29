@@ -1,0 +1,16 @@
+body{
+  font-family: monospace;
+  text-align: center;
+}
+
+form{
+  display: flex;
+  flex-flow: column wrap;
+  margin: 40px auto;
+  width: 40%;
+}
+
+form > input{
+  height: 20px;
+  margin: 10px;
+}
